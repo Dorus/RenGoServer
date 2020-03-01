@@ -1,0 +1,49 @@
+{
+  "name": "rengo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npm run serve",
+    "build": "npm run && npm run build-ts && npm run lint && npm run copy-static-assets",
+    "serve": "node dist/cmd.js",
+    "watch-node": "nodemon dist/cmd.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "test": "jest --forceExit --coverage --verbose",
+    "watch-test": "npm run test -- --watchAll",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "debug": "npm run build && npm run watch-debug",
+    "serve-debug": "nodemon --inspect dist/cmd.js",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/auth-basic": "^1.4.1",
+    "@octokit/rest": "^17.0.0",
+    "@types/clear": "^0.1.0",
+    "@types/inquirer": "^6.5.0",
+    "@types/jest": "^25.1.3",
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^5.0.1",
+    "eslint": "^6.8.0",
+    "figlet": "^1.3.0",
+    "inquirer": "^7.0.5",
+    "lodash": "^4.17.15",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "concurrently": "^5.1.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  }
+}
